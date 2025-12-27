@@ -60,7 +60,7 @@ class TriplaneNeRFRenderer(BaseModule):
             )
             out: torch.Tensor = F.grid_sample(
                 rearrange(triplane, "Np Cp Hp Wp -> Np Cp Hp Wp", Np=3),
-                rearrange(indices2D, "Np N Nd -> Np () N Nd", Np=3),
+                rearrange(indices2D, "Np N Nd -> Np () N Nd", Np=3).to(triplane.device),
                 align_corners=False,
                 mode="bilinear",
             )
